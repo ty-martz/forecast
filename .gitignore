@@ -2,3 +2,6 @@ testfile.py
 testfile.ipynb
 .env
 env
+outline.txt
+__pycache__
+.DS_Store
