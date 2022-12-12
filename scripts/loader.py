@@ -24,9 +24,9 @@ class DataCollector:
         return self.test
     
 
-    def split_train(self, random=False, test_pct=0.2):
+    def split_train(self, random=False, test_pct=0.2, train_path='../data/train.csv', train_fill='ffill'):
         if self.full_train is None:
-            df = self.get_train_data()
+            df = self.get_train_data(path=train_path)
         else:
             df = self.full_train
         
@@ -39,6 +39,7 @@ class DataCollector:
             self.val = df.iloc[cutoff_idx:]
 
     
-    def collect_split_data(self, test_pct=0.2):
-        self.split_train(test_pct=test_pct)
+    def collect_split_data(self, test_pct=0.2, path_to_train='../data/train.csv'):
+        if (self.train is None) | (self.val is None):
+            self.split_train(test_pct=test_pct, train_path=path_to_train)
         return self.train, self.val
